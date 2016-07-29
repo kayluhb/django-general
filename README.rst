@@ -2,12 +2,6 @@
 Django Utils
 =============================
 
-.. image:: https://badge.fury.io/py/django-utils.png
-    :target: https://badge.fury.io/py/django-utils
-
-.. image:: https://travis-ci.org/kayluhb/django-utils.png?branch=master
-    :target: https://travis-ci.org/kayluhb/django-utils
-
 An opinionated collection of utilities for Django
 
 Documentation
