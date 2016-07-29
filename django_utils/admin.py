@@ -6,7 +6,7 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
-from django_utils.models import DRAFT, HIDDEN, PUBLISHED
+from .models import DRAFT, HIDDEN, PUBLISHED
 
 
 PUBLISHING_INFO = (
@@ -17,18 +17,18 @@ PUBLISHING_INFO = (
 )
 
 
-def make_published(modeladmin, request, queryset):
-    """ Publish all records in the query set
-    """
-    queryset.update(status=PUBLISHED)
-make_published.short_description = _("Mark selected as published")
-
-
 def make_hidden(modeladmin, request, queryset):
     """ Publish all records in the query set
     """
     queryset.update(status=HIDDEN)
 make_unpublished.short_description = _("Mark selected as hidden")
+
+
+def make_published(modeladmin, request, queryset):
+    """ Publish all records in the query set
+    """
+    queryset.update(status=PUBLISHED)
+make_published.short_description = _("Mark selected as published")
 
 
 def make_unpublished(modeladmin, request, queryset):

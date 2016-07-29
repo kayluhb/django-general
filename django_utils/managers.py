@@ -4,7 +4,7 @@ import datetime
 
 from django.db import models
 
-from django_utils.models import HIDDEN, PUBLISHED
+from .models import HIDDEN, PUBLISHED
 
 
 class StatusManager(models.Manager):

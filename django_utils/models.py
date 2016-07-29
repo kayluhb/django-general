@@ -5,14 +5,14 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from django_utils.managers import StatusManager
+from .managers import StatusManager
 
 
 # Use **BLANK instead of null=True, blank=True
 BLANK = {'blank': True, 'null': True}
 
 # Set up the statuses so they're globally accessible
-HIDDEN, DRAFT, PUBLISHED = 'H', 'D', 'P'
+DRAFT, HIDDEN, PUBLISHED = 'D', 'H', 'P'
 
 STATUSES = (
     (HIDDEN, _("Hidden")),
