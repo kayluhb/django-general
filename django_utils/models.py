@@ -5,7 +5,7 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from ..managers import StatusManager
+from django_utils.managers import StatusManager
 
 
 # Use **BLANK instead of null=True, blank=True

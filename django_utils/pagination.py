@@ -2,7 +2,7 @@
 
 from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
 
-from .settings import DJANGO_UTILS_PER_PAGE
+from django_utils.settings import DJANGO_UTILS_PER_PAGE
 
 
 PER_PAGE = DJANGO_UTILS_PER_PAGE

@@ -6,7 +6,7 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import DRAFT, HIDDEN, PUBLISHED
+from django_utils.models import DRAFT, HIDDEN, PUBLISHED
 
 
 PUBLISHING_INFO = (
