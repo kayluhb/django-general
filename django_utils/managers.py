@@ -4,7 +4,7 @@ import datetime
 
 from django.db import models
 
-from . import models
+import models as django_utils_models
 
 
 class StatusManager(models.Manager):
@@ -13,7 +13,7 @@ class StatusManager(models.Manager):
         today = datetime.date.today()
 
         return super(StatusManager, self).filter(
-            status=models.PUBLISHED,
+            status=django_utils_models.PUBLISHED,
             pub_date__lte=today,
         ).filter(
             models.Q(expire_date__gt=today) |
@@ -24,7 +24,10 @@ class StatusManager(models.Manager):
         today = datetime.date.today()
 
         return super(StatusManager, self).filter(
-            status__in=[models.PUBLISHED, models.HIDDEN],
+            status__in=[
+                django_utils_models.PUBLISHED,
+                django_utils_models.HIDDEN
+            ],
             pub_date__lte=today,
         ).filter(
             models.Q(expire_date__gt=today) |
