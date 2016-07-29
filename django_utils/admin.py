@@ -21,7 +21,7 @@ def make_hidden(modeladmin, request, queryset):
     """ Publish all records in the query set
     """
     queryset.update(status=HIDDEN)
-make_unpublished.short_description = _("Mark selected as hidden")
+make_hidden.short_description = _("Mark selected as hidden")
 
 
 def make_published(modeladmin, request, queryset):
