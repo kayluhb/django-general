@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
 
 from .settings import DJANGO_UTILS_PER_PAGE
 

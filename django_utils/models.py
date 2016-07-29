@@ -5,7 +5,7 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from .managers import StatusManager
+from ..managers import StatusManager
 
 
 # Use **BLANK instead of null=True, blank=True
@@ -45,8 +45,9 @@ class StatusModel(models.Model):
     )
     status = models.CharField(
         _("Status"), max_length=1, choices=STATUSES, default=DRAFT,
-        help_text="Hidden is publicly available, but not a part of the nav or "
-        "lists. Draft hides it from unauthenticated users."
+        help_text=_(
+            "Hidden is publicly available, but not a part of the nav "
+            "or lists. Draft hides it from unauthenticated users.")
     )
 
     # This must be RE-DECLARED in the inheriting class!
@@ -74,7 +75,8 @@ class StatusModel(models.Model):
         return self.status == HIDDEN
 
     def is_published_or_hidden(self):
-        """ Returns True if the object is published or hidden, and False otherwise.
+        """ Returns True if the object is published or hidden, and False
+        otherwise.
         """
         return self.is_hidden() or self.is_published()
 
@@ -82,7 +84,7 @@ class StatusModel(models.Model):
 class TimeStampedModel(models.Model):
     """ This is an abstract model which will be inherited by nearly all models.
     When the object is created it will get a created_at timestamp and each
-    time it is modified it will recieve a updated_at time stamp as well.
+    time it is modified it will receive a updated_at time stamp as well.
     """
     created_at = models.DateTimeField(
         _("Created at"), auto_now_add=True, db_index=True)
