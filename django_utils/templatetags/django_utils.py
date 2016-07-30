@@ -10,7 +10,7 @@ from ..pagination import PerPageNode
 register = Library()
 
 HTML5_DATE_FORMAT = settings.DJANGO_UTILS_HTML5_DATE_FORMAT
-HTML5_DATE_TIME_FORMAT = settings.DJANGO_UTILS_HTML5_DATE_TIME_FORMAT
+HTML5_DATETIME_FORMAT = settings.DJANGO_UTILS_HTML5_DATETIME_FORMAT
 
 
 @register.simple_tag
@@ -117,7 +117,7 @@ def time_tag(
     time,
     fmt="%b. %e, %Y %I:%M %p",
     text="",
-    attr_fmt=HTML5_DATE_TIME_FORMAT
+    attr_fmt=HTML5_DATETIME_FORMAT
 ):
     """ Returns an HTML5 time tag with the correct date format
     """
