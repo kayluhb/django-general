@@ -136,6 +136,13 @@ def time_tag(
     )
 
 
+@register.filter
+def times(count):
+    """ Returns a range of a given integer
+    """
+    return range(int(count))
+
+
 @register.simple_tag
 def url_replace(request, field, value):
     """ Method for replacing fields in the URL string
