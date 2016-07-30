@@ -1,11 +1,24 @@
 # -*- coding: utf-8 -*-
 
 from django.core.paginator import EmptyPage, Paginator, PageNotAnInteger
+from django.template import Node
 
 from .settings import DJANGO_UTILS_PER_PAGE
 
 
 PER_PAGE = DJANGO_UTILS_PER_PAGE
+
+
+class PerPageNode(Node):
+    """ A Node for the per page template tag
+    """
+    def __init__(self, num, context_name):
+        self.num, self.context_name = num, context_name
+
+    def render(self, context):
+        rng = range(int(self.num))
+        context[self.context_name] = [(x * PER_PAGE + PER_PAGE) for x in rng]
+        return ""
 
 
 def get_pager_params(get):

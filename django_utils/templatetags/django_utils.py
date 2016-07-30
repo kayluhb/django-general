@@ -2,10 +2,15 @@ import re
 
 from django.conf import settings
 from django.core.cache import cache
-from django.template import Library, Node, TemplateSyntaxError
+from django.template import Library, TemplateSyntaxError
+
+from ..pagination import PerPageNode
 
 
 register = Library()
+
+HTML5_DATE_FORMAT = settings.DJANGO_UTILS_HTML5_DATE_FORMAT
+HTML5_DATE_TIME_FORMAT = settings.DJANGO_UTILS_HTML5_DATE_TIME_FORMAT
 
 
 @register.simple_tag
@@ -26,14 +31,13 @@ def on_class(value, dic):
 def date_tag(time, fmt="%m.%d.%Y", text=""):
     """ Returns an HTML5 time tag with the correct date format
     """
-
     if not time:
         return ""
 
     if not text:
         text = time.strftime(fmt)
 
-    return time_tag(time, fmt, text, settings.HTML5_DATE_FORMAT)
+    return time_tag(time, fmt, text, HTML5_DATE_FORMAT)
 
 
 @register.simple_tag
@@ -79,13 +83,13 @@ def external_link(url, text="", klass=""):
 def per_page_range(parser, token):
     """ Returns a PerPageNode
     """
-    error = "%s takes the syntax %s number_to_iterate as context_variable"
+    error = "{} takes the syntax {} number_to_iterate as context_variable"
     try:
         fnctn, num, trash, context_name = token.split_contents()
     except ValueError:
-        raise TemplateSyntaxError, error % (fnctn, fnctn)
+        raise TemplateSyntaxError(error.format(fnctn, fnctn))
     if not trash == 'as':
-        raise TemplateSyntaxError, error % (fnctn, fnctn)
+        raise TemplateSyntaxError(error.format(fnctn, fnctn))
     return PerPageNode(num, context_name)
 
 
@@ -113,7 +117,7 @@ def time_tag(
     time,
     fmt="%b. %e, %Y %I:%M %p",
     text="",
-    attr_fmt=settings.HTML5_DATE_TIME_FORMAT
+    attr_fmt=HTML5_DATE_TIME_FORMAT
 ):
     """ Returns an HTML5 time tag with the correct date format
     """
@@ -144,15 +148,3 @@ def url_replace(request, field, value):
         dict_[field] = value
 
     return dict_.urlencode()
-
-
-class PerPageNode(Node):
-    """
-    """
-    def __init__(self, num, context_name):
-        self.num, self.context_name = num, context_name
-
-    def render(self, context):
-        rng = range(int(self.num))
-        context[self.context_name] = [(x * 25 + 25) for x in rng]
-        return ""
