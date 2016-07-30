@@ -1,16 +1,20 @@
 import re
 
-from django.conf import settings
 from django.core.cache import cache
 from django.template import Library, TemplateSyntaxError
 
 from ..pagination import PerPageNode
 
+from .settings import (
+    DJANGO_UTILS_HTML5_DATE_FORMAT,
+    DJANGO_UTILS_HTML5_DATETIME_FORMAT
+)
+
 
 register = Library()
 
-HTML5_DATE_FORMAT = settings.DJANGO_UTILS_HTML5_DATE_FORMAT
-HTML5_DATETIME_FORMAT = settings.DJANGO_UTILS_HTML5_DATETIME_FORMAT
+HTML5_DATE_FORMAT = DJANGO_UTILS_HTML5_DATE_FORMAT
+HTML5_DATETIME_FORMAT = DJANGO_UTILS_HTML5_DATETIME_FORMAT
 
 
 @register.simple_tag
