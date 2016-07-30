@@ -4,8 +4,7 @@ from django.core.cache import cache
 from django.template import Library, TemplateSyntaxError
 
 from ..pagination import PerPageNode
-
-from .settings import (
+from ..settings import (
     DJANGO_UTILS_HTML5_DATE_FORMAT,
     DJANGO_UTILS_HTML5_DATETIME_FORMAT
 )
