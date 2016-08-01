@@ -69,6 +69,11 @@ class StatusModel(models.Model):
                 self.expire_date > today)
         )
 
+    def is_draft(self):
+        """ Returns True if object is draft
+        """
+        return self.status == DRAFT
+
     def is_hidden(self):
         """ Returns True if object is hidden
         """
