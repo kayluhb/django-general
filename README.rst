@@ -4,6 +4,9 @@ Django Utils
 
 An opinionated collection of utilities for Django
 
+.. image:: https://travis-ci.org/kayluhb/django-utils.png?branch=master
+    :target: https://travis-ci.org/kayluhb/django-utils
+
 Documentation
 -------------
 
