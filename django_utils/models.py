@@ -25,7 +25,7 @@ class OrderedModel(models.Model):
     """ An abstract model for ordering via an integer.
     """
     order = models.PositiveSmallIntegerField(
-        _("Order"), default=0, help_text=("1 appears before 2")
+        _("Order"), default=1, help_text=("1 appears before 2")
     )
 
     class Meta:
