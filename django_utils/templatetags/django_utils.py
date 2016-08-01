@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+""" Template tags 
+"""
 import re
 
 from django.template import Library, TemplateSyntaxError
@@ -18,6 +21,9 @@ HTML5_DATETIME_FORMAT = DJANGO_UTILS_HTML5_DATETIME_FORMAT
 @register.simple_tag
 def checked(value, dic):
     """ Returns ' checked' if the value is in the dictionary
+    :param value: the value of the input
+    :param dic: a list of all values
+    :returns: ' checked' string if value is present in the dic
     """
     return ' checked' if str(value) in dic else ''
 
@@ -25,6 +31,9 @@ def checked(value, dic):
 @register.simple_tag
 def on_class(value, dic):
     """ Returns 'class="on"' if the value is in the dictionary
+    :param value: the value of the input
+    :param dic: a list of all values
+    :returns: 'class="on"' string if value is present in the dic
     """
     return 'class="on"' if str(value) in dic else ''
 
@@ -32,6 +41,10 @@ def on_class(value, dic):
 @register.simple_tag
 def date_tag(time, fmt="%m.%d.%Y", text=""):
     """ Returns an HTML5 time tag with the correct date format
+    :param time: the time
+    :param fmt: the python format
+    :param text: (optional) the text you want displayed in the tag
+    :returns: formatted html time tag
     """
     if not time:
         return ""
@@ -45,6 +58,10 @@ def date_tag(time, fmt="%m.%d.%Y", text=""):
 @register.simple_tag
 def external_link_or_default(url, text, min_length):
     """ Returns an external link
+    :param url: URL to link to
+    :param text: text you want displayed
+    :param min_length: the min_length of the url
+    :returns: formatted HTML string
     """
     if len(url) > min_length:
         return external_link(url, text)
@@ -55,6 +72,10 @@ def external_link_or_default(url, text, min_length):
 @register.simple_tag
 def external_link(url, text="", klass=""):
     """ Returns a formatted link to an external URL
+    :param url: the url to link to
+    :param text: (optional) the text you want displayed in the link
+    :param klass: (optional) the class you want applied to the link
+    :returns: formatted link to an external site
     """
     if url is None:
         return ""

@@ -4,8 +4,6 @@ import datetime
 
 from django.db import models
 
-# from django_utils.models import (PUBLISHED, DRAFT, HIDDEN)
-
 
 class StatusManager(models.Manager):
     """ This adds a query methods to pull records based on status.
