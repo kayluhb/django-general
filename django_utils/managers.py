@@ -4,7 +4,7 @@ import datetime
 
 from django.db import models
 
-import models as django_utils_models
+import .models as django_utils_models
 
 
 class StatusManager(models.Manager):
