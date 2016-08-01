@@ -72,7 +72,7 @@ class TestDjangoUtils(TestCase):
         status_model = StatusModelTest.objects.all()[0]
         self.assertTrue(status_model.is_draft())
 
-    def test_status_model_published(self):
+    def test_status_model_draft(self):
         """ Test the StatusModel draft state
         """
         status_model = StatusModelTest.objects.filter(status=DRAFT)[0]

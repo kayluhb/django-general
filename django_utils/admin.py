@@ -95,7 +95,10 @@ def export_select_fields_csv_action(
                 writer.writerow(field_names)
 
         for obj in queryset:
-            writer.writerow([unicode(getattr(obj, field)).encode('utf-8') for field in field_names])
+            writer.writerow(
+                [unicode(
+                    getattr(obj, field)
+                ).encode('utf-8') for field in field_names])
 
         return response
 

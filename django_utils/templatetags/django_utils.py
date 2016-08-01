@@ -1,6 +1,5 @@
 import re
 
-from django.core.cache import cache
 from django.template import Library, TemplateSyntaxError
 
 from ..pagination import PerPageNode
