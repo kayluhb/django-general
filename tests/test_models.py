@@ -20,9 +20,8 @@ class OrderedModelTest(OrderedModel):
     """ An implementation of the OrderedModel abstract class
     """
 
-    class Meta:
+    class Meta(OrderedModel.Meta):
         app_label = 'django_utils'
-        ordering = ('order',)
 
 
 class StatusModelTest(StatusModel):
