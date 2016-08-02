@@ -20,6 +20,7 @@ try:
             "django_utils",
         ],
         SITE_ID=1,
+        SECRET_KEY='12345'
         MIDDLEWARE_CLASSES=(),
     )
 
