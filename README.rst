@@ -10,7 +10,9 @@ An opinionated collection of utilities for Django
 Documentation
 -------------
 
-The full documentation is at https://django-utils.readthedocs.org.
+Build the full documentation by running
+
+    make docs
 
 Quickstart
 ----------
