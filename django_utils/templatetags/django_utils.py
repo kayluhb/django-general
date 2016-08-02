@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-""" Template tags 
+""" Commonly used template tags and filters
 """
 import re
 
@@ -71,11 +71,23 @@ def external_link_or_default(url, text, min_length):
 
 @register.simple_tag
 def external_link(url, text="", klass=""):
-    """ Returns a formatted link to an external URL
-    :param url: the url to link to
-    :param text: (optional) the text you want displayed in the link
-    :param klass: (optional) the class you want applied to the link
-    :returns: formatted link to an external site
+    """Returns a formatted link to an external URL
+
+    Appends http if not present and uses the domain name as the text if no text
+    is given.
+
+    Args:
+
+        url (str): the url to link to
+
+        text (str): the text you want displayed in the link
+
+        klass (str): the class you want applied to the link
+
+    Returns:
+
+        str: formatted link to an external site
+
     """
     if url is None:
         return ""
