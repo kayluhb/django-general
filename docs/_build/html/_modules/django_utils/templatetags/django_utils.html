@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>django_utils.templatetags.django_utils &mdash; Django Utils 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Django Utils 0.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Django Utils
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">Django Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">django_utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../history.html">History</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Django Utils</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>django_utils.templatetags.django_utils</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for django_utils.templatetags.django_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot; Template tags </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">django.template</span> <span class="k">import</span> <span class="n">Library</span><span class="p">,</span> <span class="n">TemplateSyntaxError</span>
+
+<span class="kn">from</span> <span class="nn">..pagination</span> <span class="k">import</span> <span class="n">PerPageNode</span>
+<span class="kn">from</span> <span class="nn">..settings</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">DJANGO_UTILS_HTML5_DATE_FORMAT</span><span class="p">,</span>
+    <span class="n">DJANGO_UTILS_HTML5_DATETIME_FORMAT</span>
+<span class="p">)</span>
+
+
+<span class="n">register</span> <span class="o">=</span> <span class="n">Library</span><span class="p">()</span>
+
+<span class="n">HTML5_DATE_FORMAT</span> <span class="o">=</span> <span class="n">DJANGO_UTILS_HTML5_DATE_FORMAT</span>
+<span class="n">HTML5_DATETIME_FORMAT</span> <span class="o">=</span> <span class="n">DJANGO_UTILS_HTML5_DATETIME_FORMAT</span>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="checked"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.checked">[docs]</a><span class="k">def</span> <span class="nf">checked</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">dic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns &#39; checked&#39; if the value is in the dictionary</span>
+<span class="sd">    :param value: the value of the input</span>
+<span class="sd">    :param dic: a list of all values</span>
+<span class="sd">    :returns: &#39; checked&#39; string if value is present in the dic</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39; checked&#39;</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">dic</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="on_class"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.on_class">[docs]</a><span class="k">def</span> <span class="nf">on_class</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">dic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns &#39;class=&quot;on&quot;&#39; if the value is in the dictionary</span>
+<span class="sd">    :param value: the value of the input</span>
+<span class="sd">    :param dic: a list of all values</span>
+<span class="sd">    :returns: &#39;class=&quot;on&quot;&#39; string if value is present in the dic</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;class=&quot;on&quot;&#39;</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">dic</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="date_tag"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.date_tag">[docs]</a><span class="k">def</span> <span class="nf">date_tag</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;%m.</span><span class="si">%d</span><span class="s2">.%Y&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns an HTML5 time tag with the correct date format</span>
+<span class="sd">    :param time: the time</span>
+<span class="sd">    :param fmt: the python format</span>
+<span class="sd">    :param text: (optional) the text you want displayed in the tag</span>
+<span class="sd">    :returns: formatted html time tag</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">time</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">time_tag</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">HTML5_DATE_FORMAT</span><span class="p">)</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="external_link_or_default"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.external_link_or_default">[docs]</a><span class="k">def</span> <span class="nf">external_link_or_default</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">min_length</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns an external link</span>
+<span class="sd">    :param url: URL to link to</span>
+<span class="sd">    :param text: text you want displayed</span>
+<span class="sd">    :param min_length: the min_length of the url</span>
+<span class="sd">    :returns: formatted HTML string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">min_length</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">external_link</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">external_link</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="external_link"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.external_link">[docs]</a><span class="k">def</span> <span class="nf">external_link</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">klass</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns a formatted link to an external URL</span>
+<span class="sd">    :param url: the url to link to</span>
+<span class="sd">    :param text: (optional) the text you want displayed in the link</span>
+<span class="sd">    :param klass: (optional) the class you want applied to the link</span>
+<span class="sd">    :returns: formatted link to an external site</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="s1">&#39;http://&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="s1">&#39;https://&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+        <span class="s1">&#39;www.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span> <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="n">text</span>
+
+    <span class="k">if</span> <span class="n">url</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;http&quot;</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">url</span>
+
+    <span class="c1"># remove a trailing slash if it exists</span>
+    <span class="k">if</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">klass</span> <span class="o">=</span> <span class="s2">&quot; class=&#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">klass</span><span class="p">)</span> <span class="k">if</span> <span class="n">klass</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="s2">&quot;&lt;a href=</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2"> title=</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="si">{}</span><span class="s2">&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">url</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">klass</span><span class="p">,</span> <span class="n">text</span>
+    <span class="p">)</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">tag</span>
+<div class="viewcode-block" id="per_page_range"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.per_page_range">[docs]</a><span class="k">def</span> <span class="nf">per_page_range</span><span class="p">(</span><span class="n">parser</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns a PerPageNode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> takes the syntax </span><span class="si">{}</span><span class="s2"> number_to_iterate as context_variable&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fnctn</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">trash</span><span class="p">,</span> <span class="n">context_name</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">split_contents</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TemplateSyntaxError</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fnctn</span><span class="p">,</span> <span class="n">fnctn</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">trash</span> <span class="o">==</span> <span class="s1">&#39;as&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">TemplateSyntaxError</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fnctn</span><span class="p">,</span> <span class="n">fnctn</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">PerPageNode</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">context_name</span><span class="p">)</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="phone_number"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.phone_number">[docs]</a><span class="k">def</span> <span class="nf">phone_number</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns phone number from a string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">text</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r&#39;[^0-9]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="n">phone</span> <span class="o">=</span> <span class="s2">&quot;&lt;a class=&#39;phone&#39; href=&#39;tel:</span><span class="si">{}</span><span class="s2">&#39;&gt;</span><span class="si">{}{delimeter}{}{delimeter}{}</span><span class="s2">&lt;/a&gt;&quot;</span>
+
+    <span class="k">return</span> <span class="n">phone</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">,</span> <span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">text</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">text</span><span class="p">[</span><span class="mi">6</span><span class="p">:],</span> <span class="n">delimeter</span><span class="o">=</span><span class="n">delimeter</span>
+    <span class="p">)</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="time_tag"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.time_tag">[docs]</a><span class="k">def</span> <span class="nf">time_tag</span><span class="p">(</span>
+    <span class="n">time</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;%b. </span><span class="si">%e</span><span class="s2">, %Y %I:%M %p&quot;</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">attr_fmt</span><span class="o">=</span><span class="n">HTML5_DATETIME_FORMAT</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns an HTML5 time tag with the correct date format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">time</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot;&lt;time datetime=</span><span class="se">\&quot;</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2">&gt;</span><span class="si">{}</span><span class="s2">&lt;/time&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">attr_fmt</span><span class="p">),</span>
+        <span class="n">text</span>
+    <span class="p">)</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">filter</span>
+<div class="viewcode-block" id="times"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.times">[docs]</a><span class="k">def</span> <span class="nf">times</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns a range of a given integer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">count</span><span class="p">))</span></div>
+
+
+<span class="nd">@register</span><span class="o">.</span><span class="n">simple_tag</span>
+<div class="viewcode-block" id="url_replace"><a class="viewcode-back" href="../../../django_utils.templatetags.html#django_utils.templatetags.django_utils.url_replace">[docs]</a><span class="k">def</span> <span class="nf">url_replace</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Method for replacing fields in the URL string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dict_</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">field</span> <span class="o">==</span> <span class="s1">&#39;order_by&#39;</span> <span class="ow">and</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">dict_</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">dict_</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dict_</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span><span class="p">:</span>
+            <span class="c1"># click twice on same column, revert ascending/descending</span>
+            <span class="n">dict_</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dict_</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span><span class="o">+</span><span class="n">value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dict_</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">dict_</span><span class="o">.</span><span class="n">urlencode</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Caleb Brown.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
