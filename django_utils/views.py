@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
 
-UNPUBLISHED_MESSAGE = "This is not published. Only staff can view it."
+UNPUBLISHED_MESSAGE = _("This is not published. Only staff can view it.")
 
 
 class StatusShowView(DetailView):
