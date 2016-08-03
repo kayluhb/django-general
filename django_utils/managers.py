@@ -4,6 +4,11 @@ import datetime
 
 from django.db import models
 
+# Right now these are duplicated because of various issues with recursive
+# imports and different versions of Python
+# TODO: Fix this so there's only one
+DRAFT, HIDDEN, PUBLISHED = 'D', 'H', 'P'
+
 
 class StatusManager(models.Manager):
     """ This adds a query methods to pull records based on status.
@@ -13,7 +18,7 @@ class StatusManager(models.Manager):
         """ This adds a query method to pull all draft records.
         """
         return super(StatusManager, self).filter(
-            status=django_utils.models.DRAFT)
+            status=DRAFT)
 
     def published(self):
         """ This adds a query method to pull all published records that are
@@ -22,7 +27,7 @@ class StatusManager(models.Manager):
         today = datetime.date.today()
 
         return super(StatusManager, self).filter(
-            status=django_utils.models.PUBLISHED,
+            status=PUBLISHED,
             pub_date__lte=today,
         ).filter(
             models.Q(expire_date__gt=today) |
@@ -37,8 +42,8 @@ class StatusManager(models.Manager):
 
         return super(StatusManager, self).filter(
             status__in=[
-                django_utils.models.PUBLISHED,
-                django_utils.models.HIDDEN
+                PUBLISHED,
+                HIDDEN
             ],
             pub_date__lte=today,
         ).filter(
