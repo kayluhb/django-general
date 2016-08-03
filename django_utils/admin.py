@@ -10,7 +10,7 @@ from .models import DRAFT, HIDDEN, PUBLISHED
 
 
 PUBLISHING_INFO = (
-    'Publishing Information', {
+    _('Publishing Information'), {
         'fields': ['status', ('pub_date', 'expire_date'), 'slug'],
         'classes': ['collapse']
     }
