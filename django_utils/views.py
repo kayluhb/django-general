@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.general.translation import ugettext as _
+from django.utils.translation import ugettext as _
 from django.views.generic import DetailView
 
 UNPUBLISHED_MESSAGE = _("This is not published. Only staff can view it.")
