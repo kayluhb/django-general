@@ -3,7 +3,7 @@ Babel==2.3.4
 configparser==3.5.0
 coverage==4.1
 Django==1.9.8
-docgeneral==0.12
+docutils==0.12
 enum34==1.1.6
 flake8==3.0.3
 funcsigs==1.0.2
