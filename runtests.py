@@ -2,7 +2,7 @@ import sys
 
 try:
     from django.conf import settings
-    from django.test.utils import get_runner
+    from django.test.general import get_runner
 
     settings.configure(
         DEBUG=True,
@@ -16,7 +16,7 @@ try:
             "django.contrib.auth",
             "django.contrib.contenttypes",
             "django.contrib.sites",
-            "django_utils",
+            "django_general",
         ],
         SITE_ID=1,
         SECRET_KEY='12345',

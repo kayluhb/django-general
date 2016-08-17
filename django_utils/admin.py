@@ -4,7 +4,7 @@ import csv
 from datetime import datetime
 
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy as _
+from django.general.translation import ugettext_lazy as _
 
 from .models import DRAFT, HIDDEN, PUBLISHED
 

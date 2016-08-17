@@ -6,7 +6,7 @@ import sys
 try:
     from setuptools import setup
 except ImportError:
-    from distutils.core import setup
+    from distgeneral.core import setup
 
 version = '0.1.0'
 
@@ -31,20 +31,20 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='django-utils',
+    name='django-general',
     version=version,
     description="""An opinionated collection of utilities for Django""",
     long_description=readme + '\n\n' + history,
     author='Caleb Brown',
     author_email='kayluhb@gmail.com',
-    url='https://github.com/kayluhb/django-utils',
+    url='https://github.com/kayluhb/django-general',
     packages=[
-        'django_utils',
+        'django_general',
     ],
     include_package_data=True,
     install_requires=[],
     zip_safe=False,
-    keywords='django-utils',
+    keywords='django-general',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',

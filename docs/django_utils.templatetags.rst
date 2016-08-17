@@ -1,13 +1,13 @@
-django_utils.templatetags package
+django_general.templatetags package
 =================================
 
 Submodules
 ----------
 
-django_utils.templatetags.django_utils module
+django_general.templatetags.django_general module
 ---------------------------------------------
 
-.. automodule:: django_utils.templatetags.django_utils
+.. automodule:: django_general.templatetags.django_general
     :members:
     :undoc-members:
     :show-inheritance:
@@ -16,7 +16,7 @@ django_utils.templatetags.django_utils module
 Module contents
 ---------------
 
-.. automodule:: django_utils.templatetags
+.. automodule:: django_general.templatetags
     :members:
     :undoc-members:
     :show-inheritance:

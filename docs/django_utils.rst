@@ -1,4 +1,4 @@
-django_utils package
+django_general package
 ====================
 
 Subpackages
@@ -6,55 +6,55 @@ Subpackages
 
 .. toctree::
 
-    django_utils.templatetags
+    django_general.templatetags
 
 Submodules
 ----------
 
-django_utils.admin module
+django_general.admin module
 -------------------------
 
-.. automodule:: django_utils.admin
+.. automodule:: django_general.admin
     :members:
     :undoc-members:
     :show-inheritance:
 
-django_utils.managers module
+django_general.managers module
 ----------------------------
 
-.. automodule:: django_utils.managers
+.. automodule:: django_general.managers
     :members:
     :undoc-members:
     :show-inheritance:
 
-django_utils.models module
+django_general.models module
 --------------------------
 
-.. automodule:: django_utils.models
+.. automodule:: django_general.models
     :members:
     :undoc-members:
     :show-inheritance:
 
-django_utils.pagination module
+django_general.pagination module
 ------------------------------
 
-.. automodule:: django_utils.pagination
+.. automodule:: django_general.pagination
     :members:
     :undoc-members:
     :show-inheritance:
 
-django_utils.settings module
+django_general.settings module
 ----------------------------
 
-.. automodule:: django_utils.settings
+.. automodule:: django_general.settings
     :members:
     :undoc-members:
     :show-inheritance:
 
-django_utils.shortcuts module
+django_general.shortcuts module
 -----------------------------
 
-.. automodule:: django_utils.shortcuts
+.. automodule:: django_general.shortcuts
     :members:
     :undoc-members:
     :show-inheritance:
@@ -63,7 +63,7 @@ django_utils.shortcuts module
 Module contents
 ---------------
 
-.. automodule:: django_utils
+.. automodule:: django_general
     :members:
     :undoc-members:
     :show-inheritance:

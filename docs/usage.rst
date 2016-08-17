@@ -2,6 +2,6 @@
 Usage
 ========
 
-To use Django Utils in a project::
+To use Django General in a project::
 
-    import django_utils
+    import django_general

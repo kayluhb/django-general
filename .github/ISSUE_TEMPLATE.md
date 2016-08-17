@@ -1,4 +1,4 @@
-* Django Utils version:
+* Django General version:
 * Django version:
 * Python version:
 * Operating System:
