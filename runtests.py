@@ -16,7 +16,7 @@ try:
             "django.contrib.auth",
             "django.contrib.contenttypes",
             "django.contrib.sites",
-            "django_utils",
+            "django_general",
         ],
         SITE_ID=1,
         SECRET_KEY='12345',

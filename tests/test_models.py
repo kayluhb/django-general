@@ -2,17 +2,17 @@
 # -*- coding: utf-8 -*-
 
 """
-test_django-utils
+test_django-general
 ------------
 
-Tests for `django-utils` models module.
+Tests for `django-general` models module.
 """
 import datetime
 
 from django.db import models
 from django.test import TestCase
 
-from django_utils.models import (
+from django_general.models import (
     DRAFT, HIDDEN, PUBLISHED, OrderedModel, StatusModel, TimeStampedModel)
 
 
@@ -21,7 +21,7 @@ class OrderedModelTest(OrderedModel):
     """
 
     class Meta(OrderedModel.Meta):
-        app_label = 'django_utils'
+        app_label = 'django_general'
 
 
 class StatusModelTest(StatusModel):
@@ -29,7 +29,7 @@ class StatusModelTest(StatusModel):
     """
 
     class Meta:
-        app_label = 'django_utils'
+        app_label = 'django_general'
 
 
 class TimeStampedModelTest(TimeStampedModel):
@@ -38,7 +38,7 @@ class TimeStampedModelTest(TimeStampedModel):
     title = models.CharField(blank=True, max_length=255)
 
     class Meta:
-        app_label = 'django_utils'
+        app_label = 'django_general'
 
 
 class TestDjangoUtils(TestCase):
