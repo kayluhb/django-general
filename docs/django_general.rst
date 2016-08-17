@@ -1,5 +1,5 @@
 django_general package
-====================
+======================
 
 Subpackages
 -----------
@@ -12,7 +12,7 @@ Submodules
 ----------
 
 django_general.admin module
--------------------------
+---------------------------
 
 .. automodule:: django_general.admin
     :members:
@@ -20,7 +20,7 @@ django_general.admin module
     :show-inheritance:
 
 django_general.managers module
-----------------------------
+------------------------------
 
 .. automodule:: django_general.managers
     :members:
@@ -28,7 +28,7 @@ django_general.managers module
     :show-inheritance:
 
 django_general.models module
---------------------------
+----------------------------
 
 .. automodule:: django_general.models
     :members:
@@ -36,7 +36,7 @@ django_general.models module
     :show-inheritance:
 
 django_general.pagination module
-------------------------------
+--------------------------------
 
 .. automodule:: django_general.pagination
     :members:
@@ -44,7 +44,7 @@ django_general.pagination module
     :show-inheritance:
 
 django_general.settings module
-----------------------------
+------------------------------
 
 .. automodule:: django_general.settings
     :members:
@@ -52,9 +52,17 @@ django_general.settings module
     :show-inheritance:
 
 django_general.shortcuts module
------------------------------
+-------------------------------
 
 .. automodule:: django_general.shortcuts
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+django_general.views module
+---------------------------
+
+.. automodule:: django_general.views
     :members:
     :undoc-members:
     :show-inheritance:

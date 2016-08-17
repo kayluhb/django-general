@@ -1,5 +1,5 @@
 django_general
-============
+==============
 
 .. toctree::
    :maxdepth: 4
