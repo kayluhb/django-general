@@ -2,7 +2,7 @@ import sys
 
 try:
     from django.conf import settings
-    from django.test.general import get_runner
+    from django.test.utils import get_runner
 
     settings.configure(
         DEBUG=True,
