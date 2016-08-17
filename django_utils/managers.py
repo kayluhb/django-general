@@ -17,8 +17,7 @@ class StatusManager(models.Manager):
     def draft(self):
         """ This adds a query method to pull all draft records.
         """
-        return super(StatusManager, self).filter(
-            status=DRAFT)
+        return super(StatusManager, self).filter(status=DRAFT)
 
     def published(self):
         """ This adds a query method to pull all published records that are
