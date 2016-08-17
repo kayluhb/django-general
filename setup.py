@@ -6,7 +6,7 @@ import sys
 try:
     from setuptools import setup
 except ImportError:
-    from distgeneral.core import setup
+    from distutils.core import setup
 
 version = '0.1.0'
 
